@@ -53,6 +53,8 @@
 
 .page-header {
   color: #f6f6f6;
+  background-color: darkslategray;
+  margin: 0;
 }
 
 .subnav {
