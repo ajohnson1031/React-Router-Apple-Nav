@@ -1,9 +1,20 @@
 import React from "react";
-import { Container, Image } from "semantic-ui-react";
-import { Route, NavLink } from "react-router-dom";
+import { Container } from "semantic-ui-react";
+import { Route } from "react-router-dom";
+import AppleLink from "./AppleLink";
 import AppleLogo from "../imgs/apple-logo.png";
 import AppleBag from "../imgs/bag_image_large.png";
 import AppleSearch from "../imgs/search_image_large.png";
+import Home from "./Home";
+import Support from "./Support";
+import Search from "./Search";
+import Bag from "./Bag";
+import MacIcons from "./MacIcons";
+import IPadIcons from "./IPadIcons";
+import IPhoneIcons from "./IPhoneIcons";
+import WatchIcons from "./WatchIcons";
+import TVIcons from "./TVIcons";
+import MusicIcons from "./MusicIcons";
 
 const NavWrapper = () => {
   const headerNavItems = [
@@ -34,30 +45,38 @@ const NavWrapper = () => {
     }
   ];
 
-  console.log();
-
   return (
     <Container className="nav-header">
       <Container className="nav-wrapper">
-        {headerNavItems.map(item => {
+        {headerNavItems.map((item, i) => {
           return (
-            <Route
-              render={props => (
-                <NavLink
-                  to={`/${item.path === null ? "" : item.path}`}
-                  className="hnav-link"
-                >
-                  {item.text === null ? (
-                    <Image src={item.icon} alt={item.path} width="18.5" />
-                  ) : (
-                    item.text
-                  )}
-                </NavLink>
-              )}
-            />
+            <div key={i}>
+              <Route
+                path={``}
+                render={props => (
+                  <AppleLink
+                    {...props}
+                    icon={item.icon}
+                    text={item.text}
+                    path={`/${item.path === null ? "" : item.path}`}
+                    keynum={item[i]}
+                  />
+                )}
+              />
+            </div>
           );
-        })}
-      </Container>
+        })}{" "}
+      </Container>{" "}
+      <Route exact path="/" component={Home} />
+      <Route path="/mac" component={MacIcons} />
+      <Route path="/ipad" component={IPadIcons} />
+      <Route path="/iphone" component={IPhoneIcons} />
+      <Route path="/watch" component={WatchIcons} />
+      <Route path="/tv" component={TVIcons} />
+      <Route path="/music" component={MusicIcons} />
+      <Route path="/support" component={Support} />
+      <Route path="/search" component={Search} />
+      <Route path="/shopping-bag" component={Bag} />
     </Container>
   );
 };
